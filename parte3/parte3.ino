@@ -11,7 +11,7 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(baud_rate);
   xbee_serial.begin(baud_rate);
-  while(!xbee_serial.available())
+  while(xbee_serial.available()<=0)
   {
     
   }
@@ -19,8 +19,8 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  if(xbee_serial.available())
+  while(xbee_serial.available()>0)
     Serial.write(xbee_serial.read());
-  if(Serial.available())
+  while(Serial.available()>0)
     xbee_serial.write(Serial.read());
 }
