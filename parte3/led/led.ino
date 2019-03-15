@@ -2,6 +2,7 @@
 
 int rx = 10;
 int tx = 11;
+int led = 13;
 
 SoftwareSerial xbee_serial(rx,tx);
 
@@ -15,12 +16,19 @@ void setup() {
   {
     
   }
+  pinMode(led, OUTPUT);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   while(xbee_serial.available()>0)
+  {
     Serial.write(xbee_serial.read());
+    digitalWrite(led, HIGH);
+  }
   while(Serial.available()>0)
+  {
     xbee_serial.write(Serial.read());
+    digitalWrite(led, LOW);
+  }
 }
